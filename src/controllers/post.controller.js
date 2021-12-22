@@ -26,7 +26,7 @@ const getAllPosts = async (req, res) => {
             "body": "$body",
             "image": "$image",
             "url": [
-                {"$concat":["http://localhost:3000/v1/posts/", {
+                {"$concat":["https://breath-info-api.herokuapp.com/v1/posts/", {
                     "$convert":{
                         "input": "$_id",
                         "to": "string"
