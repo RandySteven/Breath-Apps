@@ -2,6 +2,7 @@ const { urlencoded } = require('body-parser')
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const path = require('path')
 
 const PostRouter = require('./src/routes/post.route')
 
@@ -13,6 +14,7 @@ const MONGOURL = process.env.MONGOURL
 app.use(urlencoded({extended:true}))
 
 app.use('/v1/posts', PostRouter.router)
+app.use('/public/images', express.static(path.join(__dirname, 'public/images')))
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
