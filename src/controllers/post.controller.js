@@ -34,7 +34,7 @@ const getAllPosts = async (req, res) => {
                     }
                 }]},
             "image":{
-                "$concat":["https://localhost:3000/", {
+                "$concat":["https://breath-info-api.herokuapp.com/", {
                     "$replaceAll":{
                         "input":"$image",
                         "find":"\\",
