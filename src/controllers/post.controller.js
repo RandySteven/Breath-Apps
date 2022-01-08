@@ -1,3 +1,4 @@
+const { text } = require('express')
 const Post = require('../models/post.model')
 
 const addPost = async (req, res) => {
@@ -20,21 +21,27 @@ const addPost = async (req, res) => {
 }
 
 const getAllPosts = async (req, res) => {
-    let posts = await Post.aggregate([
+    let posts = await Post.find()
+    posts = await Post.aggregate([
         {"$project":{
             "title": "$title",
             "body": "$body",
-            "image": [
-                {"$concat":["https://breath-info-api.herokuapp.com/", "$image"]}
-            ],
-            "url": [
+            "url": 
                 {"$concat":["https://breath-info-api.herokuapp.com/v1/posts/", {
                     "$convert":{
                         "input": "$_id",
                         "to": "string"
                     }
-                }]}
-            ]
+                }]},
+            "image":{
+                "$concat":["https://localhost:3000/", {
+                    "$replaceAll":{
+                        "input":"$image",
+                        "find":"\\",
+                        "replacement":"/"
+                    }
+                }]
+            }
         }}
     ])
 
