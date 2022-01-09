@@ -17,7 +17,8 @@ const addPost = async (req, res) => {
         image: image
     })
     post = await post.save()
-    res.status(201).send({message:'Success create post', post:post})
+    // res.status(201).send({message:'Success create post', post:post})
+    res.redirect('/')
 }
 
 const getAllPosts = async (req, res) => {

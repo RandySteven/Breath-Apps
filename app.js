@@ -11,6 +11,7 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const MONGOURL = process.env.MONGOURL
 
+app.set('view engine', 'ejs')
 app.use(urlencoded({extended:true}))
 
 app.use('/v1/posts', PostRouter.router)
@@ -24,7 +25,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    res.send({message:'Hello'})
+    res.render('form.ejs')
 })
 
 mongoose.connect(MONGOURL)
